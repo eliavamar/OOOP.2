@@ -1,8 +1,13 @@
 package api;
 
-import javax.swing.*;
 import java.util.*;
-
+/**
+ * This class implement the  interface that represents a directional weighted graph.
+ * The interface has a road-system or communication network in mind -
+ * and  support a large number of nodes (over 100,000).
+ * The implementation based on an efficient compact representation
+ *
+ */
 public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data> {
     private HashMap<Integer, node_data> graph;
     private HashMap<Integer, HashMap<Integer, edge_data>> dEdge;
@@ -10,7 +15,7 @@ public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data
     private int edgeSize;
 
     /**
-     * this method is constructor for new DirectedWeightedGraph
+     * this method is constructor for new DWGraph_DS
      */
     public DWGraph_DS() {
 
@@ -47,7 +52,9 @@ public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data
     }
 
     /**
+     * this method
      * add a new node to the graph with the giving node_data
+     * if there is a node in the graph with this key does nothing
      *
      * @param n
      */
@@ -79,7 +86,7 @@ public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data
                 MC++;
                 edgeSize++;
 
-            } else if (w != dEdge.get(src).get(dest).getWeight() && w > 0) {
+            } else if (w != dEdge.get(src).get(dest).getWeight()) {
                 EdgeData e = new EdgeData(src, dest, w);
                 dEdge.get(src).put(dest, e);
                 MC++;
@@ -118,7 +125,7 @@ public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data
     }
 
     /**
-     * Deletes the node (with the given key) from the graph -
+     * this method deletes the node (with the given key) from the graph -
      * and removes all edges which starts or ends at this node.
      *
      * @param key
@@ -136,7 +143,6 @@ public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data
             int s = node.getKey();
             int d = key;
             if (s != key && dEdge.get(s).get(d) != null) {
-                edge_data w = dEdge.get(s).get(d);
                 dEdge.get(s).remove(d);
                 edgeSize--;
             }
@@ -149,54 +155,29 @@ public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data
     }
 
     /**
-     * Indicates whether some other object is "equal to" this one.
-     * <p>
-     * The {@code equals} method implements an equivalence relation
-     * on non-null object references:
-     * <ul>
-     * <li>It is <i>reflexive</i>: for any non-null reference value
-     *     {@code x}, {@code x.equals(x)} should return
-     *     {@code true}.
-     * <li>It is <i>symmetric</i>: for any non-null reference values
-     *     {@code x} and {@code y}, {@code x.equals(y)}
-     *     should return {@code true} if and only if
-     *     {@code y.equals(x)} returns {@code true}.
-     * <li>It is <i>transitive</i>: for any non-null reference values
-     *     {@code x}, {@code y}, and {@code z}, if
-     *     {@code x.equals(y)} returns {@code true} and
-     *     {@code y.equals(z)} returns {@code true}, then
-     *     {@code x.equals(z)} should return {@code true}.
-     * <li>It is <i>consistent</i>: for any non-null reference values
-     *     {@code x} and {@code y}, multiple invocations of
-     *     {@code x.equals(y)} consistently return {@code true}
-     *     or consistently return {@code false}, provided no
-     *     information used in {@code equals} comparisons on the
-     *     objects is modified.
-     * <li>For any non-null reference value {@code x},
-     *     {@code x.equals(null)} should return {@code false}.
-     * </ul>
-     * <p>
-     * The {@code equals} method for class {@code Object} implements
-     * the most discriminating possible equivalence relation on objects;
-     * that is, for any non-null reference values {@code x} and
-     * {@code y}, this method returns {@code true} if and only
-     * if {@code x} and {@code y} refer to the same object
-     * ({@code x == y} has the value {@code true}).
-     * <p>
-     * Note that it is generally necessary to override the {@code hashCode}
-     * method whenever this method is overridden, so as to maintain the
-     * general contract for the {@code hashCode} method, which states
-     * that equal objects must have equal hash codes.
+     * this two method (equals hashCode) check if two graphs are equals
      *
-     * @param obj the reference object with which to compare.
-     * @return {@code true} if this object is the same as the obj
-     * argument; {@code false} otherwise.
-     * @see #hashCode()
-     * @see HashMap
+     * @param o ->graph
+     * @return true if them equals else return false
      */
     @Override
-    public boolean equals(Object obj) {
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DWGraph_DS)) return false;
+
+        DWGraph_DS that = (DWGraph_DS) o;
+
+        if (edgeSize != that.edgeSize) return false;
+        if (graph != null ? !graph.equals(that.graph) : that.graph != null) return false;
+        return dEdge.equals(that.dEdge);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = graph != null ? graph.hashCode() : 0;
+        result = 31 * result + dEdge.hashCode();
+        result = 31 * result + edgeSize;
+        return result;
     }
 
     /**
@@ -229,7 +210,7 @@ public class DWGraph_DS implements directed_weighted_graph, Comparator<node_data
     }
 
     /**
-     * Returns the number of edges
+     * this method returns the number of edges
      *
      * @return edge size->number of edges in the graph
      */

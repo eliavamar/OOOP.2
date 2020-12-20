@@ -16,7 +16,7 @@ import java.util.*;
  * 5. Save(file); // JSON file
  * 6. Load(file); // JSON file
  * 7.searchComponents;
- * switchGraph
+ * 8. switchGraph
  */
 public class DWGraph_Algo implements dw_graph_algorithms {
     directed_weighted_graph graphAlgo;
@@ -247,9 +247,8 @@ public class DWGraph_Algo implements dw_graph_algorithms {
     }
 
     /**
-     * Saves this weighted (directed) graph to the given
+     * this method save this weighted (directed) graph to the given
      * file name - in JSON format
-     *
      * @param file - the file name (may include a relative path).
      * @return true - iff the file was successfully saved
      */

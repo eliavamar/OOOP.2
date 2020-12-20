@@ -91,7 +91,7 @@ public class panel extends JPanel {
         int width = dim.width;
         g.setColor(Color.pink);
         g.setFont(new Font("Monaco", Font.PLAIN, 23));
-        g.drawString("Time left: " + time + ":00", width - 250, 30);
+        g.drawString("Time left: "+":00" + time  , width - 250, 30);
     }
 
     /**

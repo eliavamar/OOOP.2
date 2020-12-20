@@ -25,7 +25,6 @@ public class Gframe extends JFrame {
         this.setSize(width, height - 20);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = this.getContentPane();
-        c.setBackground(Color.pink);
         setVisible(true);
         this.setResizable(true);
         pa = new panel();
