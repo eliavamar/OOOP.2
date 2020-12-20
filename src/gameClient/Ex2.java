@@ -50,7 +50,7 @@ public class Ex2 implements Runnable {
     @Override
     public void run() {
         game_service game = Game_Server_Ex2.getServer(panelOpening.getScenario_num()); // you have [0,23] games
-        //game.login(panelOpening.getID());
+        game.login(panelOpening.getID());
 
 
         String g = game.getGraph();
