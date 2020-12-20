@@ -38,8 +38,8 @@ README >>			this file
 
 
 <h1>Introduction api</h1>
-_NodeData class_</p>
-Implements the interface of node_data.
+
+<h1>NodeData class</h1>
 represents the node (vertex) and all its properties in adirected weighted undirected graph.
 
 <h1>DWGraph_DS</h1>
