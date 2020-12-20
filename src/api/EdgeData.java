@@ -20,10 +20,11 @@ public class EdgeData implements edge_data {
      * @param w     -> weight of the edge (most be positive)
      */
     public EdgeData(int src1, int dest1, double w) {
+	if(w>0){
         src = src1;
         dest = dest1;
-        if (w > 0)
             weight = w;
+}
     }
 
     /**
